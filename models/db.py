@@ -26,6 +26,7 @@ def userShow(email, password):
     return conn.fetchall()
 
 
+
 def searchCity(cityName):
     cur.execute("""
 
