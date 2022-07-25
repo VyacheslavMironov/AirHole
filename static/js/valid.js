@@ -14,20 +14,61 @@ function input_length(ev, data, count){
 }
 
 function registration_valid(
-    event, 
+    event, x=1,
     input_name=document.getElementById('name'),
     input_surname=document.getElementById('surname')
 )
 {
-    let x = 1;
-    let y = 5;
 
     if(event == "name"){
         if (input_length(event, input_name.value, x) == true)
         {
             document.getElementById("ok-name").style.display = 'initial';
         }
+        else
+        {
+            document.getElementById("ok-name").style.display = 'none';
+        }
     }
-    input_length(event, input_surname.value, y);
+
+    else if (event == "surname"){
+        if (input_length(event, input_surname.value, x) == true)
+        {
+            document.getElementById("ok-surname").style.display = 'initial';
+        }
+        else
+        {
+            document.getElementById("ok-surname").style.display = 'none';
+        }
+    }
+}
+
+
+function valid_email(event){
+    let el = document.getElementById(event).value;
+
+    if (String(el).includes('@') == true){
+        document.getElementById("ok-email").style.display = 'initial';
+    } else{
+        document.getElementById("ok-email").style.display = 'none';
+    }
+}
+
+var arr = [];
+function password_is(){
+    x = arr[arr.length - 1];
+
+    if (arr.length > 6){
+        if(document.getElementById('exampleInputPassword').value == document.getElementById('exampleInputPassword1').value){
+            document.getElementById('btn').removeAttribute('disabled');
+        }
+    }
 
 }
+
+function valid_password(event){
+    let el = document.getElementById(event).value;
+    arr.push(el);
+    password_is();
+}
+

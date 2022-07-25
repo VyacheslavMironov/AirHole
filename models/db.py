@@ -6,36 +6,39 @@ global conn
 global cur
 
 # Соединение с базой
-conn = connect(dbname="", user="postgres", password="root")
+conn = connect(dbname="airhole", user="postgres", password="root")
 
 # Взаимодействие с базой происходят через метод курсора execute
 cur = conn.cursor()
 
 
 def newUser(name, surname, email, password):
-    cur.execute("""
-
-    """)
+    query = "INSERT INTO users('name', 'surname', 'email', 'password')"
+    query += 'VALUES("{name}", "{surname}", "{email}", "{password}");'
+    cur.execute(query)
     return conn.commit()
 
 
 def userShow(email, password):
-    cur.execute("""
+    lists=[]
+    cur.execute(f"SELECT * FROM users WHERE email='{email}' AND password='{password}';")
+    row = conn.fetchall()
+    
+    for i in row:
+        lists.append(i)
 
-    """)
-    return conn.fetchall()
+    if len(lists) > 0:
+        return lists
 
 
 
 def searchCity(cityName):
-    cur.execute("""
-
-    """)
+    cur.execute(f"SELECT * FROM aircraft WHERE city_out={cityName};")
     return conn.fetchall()
 
 
-def addOrder(**kwargs):
-    cur.execute("""
-
-    """)
+def addOrder(user_id, order_id. aircraft_id):
+    query = "INSERT INTO orders('user_id', 'order_id', 'aircraft_id')"
+    query += f'VALUES({user_id}, {order_id}, {aircraft_id});'
+    cur.execute(query)
     return conn.commit()

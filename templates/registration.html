@@ -20,24 +20,30 @@
                               </div>
                               <div class="col-6">
                                   <div class="mb-3">
+                                      <svg id="ok-surname" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgb(67, 232, 30);">
+                                        <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path>
+                                      </svg>
                                       <label class="form-label">Фамилия</label>
                                       <input id="surname" oninput="registration_valid('surname')" type="text" class="form-control">
                                   </div>
                               </div>
                           </div>
                           <div class="mb-3">
+                            <svg id="ok-email" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgb(67, 232, 30);">
+                              <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path>
+                            </svg>
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                            <input type="email" oninput="valid_email('exampleInputEmail')" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                            <input type="password" class="form-control" id="exampleInputPassword">
+                            <input type="password" oninput="valid_password('exampleInputPassword')" class="form-control" id="exampleInputPassword">
                           </div>
                           <div class="mb-3">
                               <label for="exampleInputPassword1" class="form-label">Пароль ещё раз</label>
-                              <input type="password" class="form-control" id="exampleInputPassword1">
+                              <input type="password" oninput="valid_password('exampleInputPassword1')" class="form-control" id="exampleInputPassword1">
                             </div>
-                          <button type="submit" class="btn btn-primary" disabled>Отправить</button>
+                          <button id="btn" type="submit" class="btn btn-primary" disabled>Отправить</button>
                       </form>
                   </div>
               </div>
