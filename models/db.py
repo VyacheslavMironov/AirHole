@@ -13,16 +13,18 @@ cur = conn.cursor()
 
 
 def newUser(name, surname, email, password):
-    query = "INSERT INTO users('name', 'surname', 'email', 'password')"
-    query += 'VALUES("{name}", "{surname}", "{email}", "{password}");'
+    query = 'INSERT INTO users("name", "surname", "email", "password") '
+    query += f"VALUES('{name}', '{surname}', '{email}', '{password}');"
+    print(query)
     cur.execute(query)
     return conn.commit()
 
 
 def userShow(email, password):
     lists=[]
-    cur.execute(f"SELECT * FROM users WHERE email='{email}' AND password='{password}';")
-    row = conn.fetchall()
+    cur.execute(f"SELECT * FROM users WHERE email='{email}';")
+    print(f"SELECT * FROM users WHERE email='{email}';")
+    row = cur.fetchall()
     
     for i in row:
         lists.append(i)
@@ -31,14 +33,13 @@ def userShow(email, password):
         return lists
 
 
-
 def searchCity(cityName):
     cur.execute(f"SELECT * FROM aircraft WHERE city_out={cityName};")
     return conn.fetchall()
 
 
-def addOrder(user_id, order_id. aircraft_id):
-    query = "INSERT INTO orders('user_id', 'order_id', 'aircraft_id')"
+def addOrder(user_id, order_id, aircraft_id):
+    query = "INSERT INTO orders('user_id', 'order_id', 'aircraft_id') "
     query += f'VALUES({user_id}, {order_id}, {aircraft_id});'
     cur.execute(query)
     return conn.commit()

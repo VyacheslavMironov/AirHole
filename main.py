@@ -3,11 +3,11 @@ from models.db import *
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'xxx'
 
-
-@app.route('/search/<str:name>', methods=["GET"])
-def search(name):
-    return searchCity(cityName=name)
+# @app.route('/search', methods=["GET"])
+# def search(name):
+#     return searchCity(cityName=name)
 
 
 @app.route('/', methods=["POST", "GET"])
