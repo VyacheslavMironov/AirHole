@@ -5,17 +5,23 @@ from models.db import *
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'xxx'
 
-# @app.route('/search', methods=["GET"])
-# def search(name):
-#     return searchCity(cityName=name)
-
 
 @app.route('/', methods=["POST", "GET"])
 def main():
+    lists = list()
+
     if request.method == "POST":
-        pass
+        data = searchCity(cityName=request.form.get('city'))
+    else:
+        data = allData()
     
-    return render_template("index.html")
+    return render_template("index.html", data=data, count=len(data))
+
+
+@app.route('/logout', methods=["POST", "GET"])
+def logout():
+    del session['user']
+    return redirect(url_for('main'))
 
 
 @app.route('/login', methods=["POST", "GET"])
@@ -24,6 +30,7 @@ def login():
         user = userShow(email=request.form.get('email'), password=request.form.get('password'))
         if user:
             session['user'] = user
+            return redirect(url_for('main'))
 
     return render_template("login.html")
 

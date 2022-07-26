@@ -6,8 +6,8 @@
             <div class="col-6 mx-auto">
                 <form  method="POST">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control search" placeholder="Найти можно всё..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-primary" type="button" id="button-addon2">Найти</button>
+                        <input type="text" name="city" class="form-control search" placeholder="Найти можно всё..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Найти</button>
                     </div>
                 </form>
                 <div class="row output">
@@ -36,29 +36,54 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <!-- Обработать циклом -->
-                <div class="col-8 mx-auto">
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://www.study.ru/uploads/server/OIyIuPC0nT7cmNsO.jpg" class="img-fluid rounded-start" alt="...">
+                {% if count > 0 %}
+                    <!-- Обработать циклом -->
+                    <div class="modal" tabindex="-1" id="exampleModal">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Modal body text goes here.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                            <h5 class="card-title">Москва - Саратов</h5>
-                            <p class="card-text">Вылет 20.07.2022 18:55 - Прилёт 20.07.2022 20:16</p>
-                            <p class="card-text">
-                                <small class="text-muted">
-                                    <strong>1300 р</strong>
-                                </small>
-                            </p>
-                            <button class="btn btn-primary mt-3">Купить</button>
+                      </div>
+                    {% for i in data %}
+                        <div class="col-8 mx-auto">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="https://www.study.ru/uploads/server/OIyIuPC0nT7cmNsO.jpg" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{i[3]}} - {{i[4]}}</h5>
+                                        <p class="card-text">Вылет 20.07.2022 {{i[5]}} - Прилёт 20.07.2022 {{i[6]}}</p>
+                                        <p class="card-text">
+                                            <small class="text-muted">
+                                                <strong>{{i[2]}} р</strong>
+                                            </small>
+                                        </p>
+                                        {% if session %}
+                                            <button class="btn btn-primary mt-3" data-bs-target="#exampleModal">Купить</button>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END -->
+                    {% endfor %}
+                    <!-- END -->
+                {% else %}
+                    <h2 class="text-center">Данных нет</h2>
+                {% endif %}
             </div>
         </div>
     </main>
